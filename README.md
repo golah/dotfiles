@@ -1,2 +1,2 @@
-# env
-Environment stuff
+# dotfiles
+Environment setup stuff
