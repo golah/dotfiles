@@ -11,10 +11,9 @@ ln -sf "$DOTFILES_DIR/alacritty/themes" ~/.config/alacritty/themes # If it's a d
 # Tmux
 ln -sf "$DOTFILES_DIR/tmux/.tmux.conf" ~/.tmux.conf
 
-# Neovim
-mkdir -p ~/.config/nvim
-ln -sf "$DOTFILES_DIR/nvim/init.lua" ~/.config/nvim/init.lua
-# Add more for other nvim files
+# Neovim - symlink entire dir to capture lua substructure
+rm -rf ~/.config/nvim # Safe on new setups; backs up if needed on existing
+ln -sf "$DOTFILES_DIR/nvim" ~/.config/nvim
 
 # Zsh
 ln -sf "$DOTFILES_DIR/zsh/.zshrc" ~/.zshrc
