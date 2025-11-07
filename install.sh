@@ -19,8 +19,8 @@ brew bundle install --file=Brewfile
 # Run symlink script
 ./symlink.sh
 
-# Extra steps: e.g., for Neovim plugins
-nvim --headless +PlugInstall +qall # If using Vim-Plug; adjust for your manager
+# For Lazy.nvim (adjust if not exact; sync installs/updates plugins)
+nvim --headless "+Lazy! sync" +qa || true
 
 # Reload tmux if running
 tmux source-file ~/.tmux.conf || true
