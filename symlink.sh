@@ -16,4 +16,7 @@ mkdir -p ~/.config/nvim
 ln -sf "$DOTFILES_DIR/nvim/init.lua" ~/.config/nvim/init.lua
 # Add more for other nvim files
 
+# Zsh
+ln -sf "$DOTFILES_DIR/zsh/.zshrc" ~/.zshrc
+
 echo "Symlinks created!"
