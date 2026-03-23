@@ -1,0 +1,19 @@
+# Theme
+theme = coolnight
+
+# Font
+font-family = MesloLGS Nerd Font Mono
+font-size = 14
+
+# Window
+background-opacity = 0.8
+background-blur = 20
+macos-titlebar-style = hidden
+window-padding-x = 10
+window-padding-y = 10
+
+# macOS: both Option keys act as Alt (needed for tmux/nvim keybindings)
+macos-option-as-alt = true
+
+# Terminal compatibility
+term = xterm-256color

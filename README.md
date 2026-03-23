@@ -1,9 +1,10 @@
 # Dotfiles
 
-My macOS terminal environment — Alacritty + Zsh + tmux + Neovim, all managed through Homebrew and symlinks.
+My macOS terminal environment — Alacritty / Ghostty + Zsh + tmux + Neovim, all managed through Homebrew and symlinks.
 
 ![Shell: Zsh](https://img.shields.io/badge/shell-zsh-informational?style=flat&logo=gnu-bash)
 ![Terminal: Alacritty](https://img.shields.io/badge/terminal-alacritty-F46D01?style=flat&logo=alacritty)
+![Terminal: Ghostty](https://img.shields.io/badge/terminal-ghostty-171717?style=flat&logo=ghostty)
 ![Editor: Neovim](https://img.shields.io/badge/editor-neovim-57A143?style=flat&logo=neovim)
 ![Multiplexer: tmux](https://img.shields.io/badge/multiplexer-tmux-1BB91F?style=flat&logo=tmux)
 
@@ -40,6 +41,10 @@ After install, restart your terminal.
 │   └── themes/                 # 159+ color schemes (TOML)
 │       └── themes/
 │           └── coolnight.toml  # Active theme
+├── ghostty/
+│   ├── config                  # Main Ghostty config
+│   └── themes/
+│       └── coolnight           # Coolnight theme (ported from Alacritty)
 ├── nvim/
 │   ├── init.lua                # Entry point (loads LazyVim)
 │   ├── lazy-lock.json          # Pinned plugin versions
@@ -62,6 +67,8 @@ After install, restart your terminal.
 |-------------------------------------|------------------------------------|
 | `alacritty/alacritty.toml`          | `~/.config/alacritty/alacritty.toml` |
 | `alacritty/themes/`                 | `~/.config/alacritty/themes/`      |
+| `ghostty/config`                    | `~/.config/ghostty/config`         |
+| `ghostty/themes/`                   | `~/.config/ghostty/themes/`        |
 | `nvim/`                             | `~/.config/nvim/`                  |
 | `tmux/.tmux.conf`                   | `~/.tmux.conf`                     |
 | `zsh/.zshrc`                        | `~/.zshrc`                         |
@@ -123,6 +130,73 @@ Changes apply instantly — no restart needed.
 
 ---
 
+## Ghostty
+
+**Fast, native terminal emulator** by Mitchell Hashimoto (creator of Vagrant, Terraform). Written in Zig, uses platform-native rendering. Like Alacritty, it has no tabs or splits — tmux handles that.
+
+Ghostty is configured to look and feel identical to the Alacritty setup above, using a ported version of the Coolnight theme.
+
+### Configuration Format
+
+Ghostty uses a simple `key = value` format (not TOML). One setting per line, `#` for comments.
+
+- **Config file:** `~/.config/ghostty/config`
+- **Custom themes:** `~/.config/ghostty/themes/`
+
+### Visual Settings
+
+| Setting | Value | Ghostty Config Key |
+|---------|-------|--------------------|
+| Theme | **Coolnight** (custom) | `theme = coolnight` |
+| Font | **MesloLGS Nerd Font Mono** | `font-family = MesloLGS Nerd Font Mono` |
+| Font size | **14** | `font-size = 14` |
+| Opacity | **0.8** (80%) | `background-opacity = 0.8` |
+| Blur | **Intensity 20** | `background-blur = 20` |
+| Padding | **10px** all sides | `window-padding-x = 10` / `window-padding-y = 10` |
+| Title bar | **Hidden** | `macos-titlebar-style = hidden` |
+| Option key | **Both as Alt** | `macos-option-as-alt = true` |
+| TERM | `xterm-256color` | `term = xterm-256color` |
+
+> **Note on TERM:** Ghostty ships its own terminfo (`xterm-ghostty`), but we override to `xterm-256color` for compatibility with remote servers that don't have the Ghostty terminfo installed. If you only work locally, you can use `xterm-ghostty` instead.
+
+> **Note on blur:** Unlike Alacritty's boolean `blur = true`, Ghostty takes an integer intensity. `20` gives a similar frosted-glass effect. You can also use `macos-glass-regular` or `macos-glass-clear` for macOS vibrancy effects.
+
+### Switching Themes
+
+Edit the `theme` line in `ghostty/config`:
+
+```
+theme = coolnight
+# Or use a built-in theme:
+# theme = Catppuccin Mocha
+# theme = Tokyo Night
+```
+
+List all available built-in themes:
+
+```bash
+ghostty +list-themes
+```
+
+To add a custom theme, create a file in `ghostty/themes/` (no extension) using the same `key = value` format with color settings.
+
+### Settings Comparison: Alacritty vs Ghostty
+
+| Setting | Alacritty (TOML) | Ghostty (key=value) |
+|---------|-----------------|---------------------|
+| Theme | `import = ["~/.../coolnight.toml"]` | `theme = coolnight` |
+| Font | `normal.family = "MesloLGS Nerd Font Mono"` | `font-family = MesloLGS Nerd Font Mono` |
+| Font size | `size = 14` | `font-size = 14` |
+| Opacity | `opacity = 0.8` | `background-opacity = 0.8` |
+| Blur | `blur = true` | `background-blur = 20` |
+| Decorations | `decorations = "Buttonless"` | `macos-titlebar-style = hidden` |
+| Padding | `padding.x = 10` / `padding.y = 10` | `window-padding-x = 10` / `window-padding-y = 10` |
+| Option as Alt | `option_as_alt = "Both"` | `macos-option-as-alt = true` |
+| TERM env | `[env] TERM = "xterm-256color"` | `term = xterm-256color` |
+| Colors | Separate `.toml` theme file | Separate theme file in `themes/` dir (no extension) |
+
+---
+
 ## Zsh + Powerlevel10k
 
 ### Prompt
@@ -175,7 +249,7 @@ ls    →  eza --icons=always    # Colorized file listing with file-type icons
 
 ## tmux
 
-**Terminal multiplexer** — splits, sessions, and persistent workspaces. All window management happens here, not in Alacritty.
+**Terminal multiplexer** — splits, sessions, and persistent workspaces. All window management happens here, not in the terminal emulator (neither Alacritty nor Ghostty have built-in splits).
 
 ### Visual Theme
 
@@ -226,7 +300,7 @@ Plugins are managed by [TPM](https://github.com/tmux-plugins/tpm). On a new mach
 set -g default-terminal "screen-256color"
 ```
 
-This ensures 256-color support inside tmux. Combined with Alacritty's `TERM=xterm-256color`, colors render correctly in Neovim and other tools.
+This ensures 256-color support inside tmux. Combined with the terminal emulator's `TERM=xterm-256color` (set in both Alacritty and Ghostty), colors render correctly in Neovim and other tools.
 
 ---
 
@@ -339,7 +413,8 @@ All installed via Homebrew (`brew bundle install --file=Brewfile`).
 | Cask | What It Is |
 |------|-----------|
 | **alacritty** | GPU-accelerated terminal emulator. |
-| **font-meslo-lg-nerd-font** | Primary font — Meslo LG patched with Nerd Font icons. Used by Alacritty and Powerlevel10k. |
+| **ghostty** | Fast, native terminal emulator (Zig). Identical config to Alacritty included. |
+| **font-meslo-lg-nerd-font** | Primary font — Meslo LG patched with Nerd Font icons. Used by Alacritty/Ghostty and Powerlevel10k. |
 | **font-hack-nerd-font** | Alternative Nerd Font (Hack typeface). |
 | **kid3** | Audio file tag editor (ID3, Vorbis, etc.). |
 
@@ -358,6 +433,10 @@ echo 'brew "<package>"' >> ~/dotfiles/Brewfile
 ### New Alacritty theme
 
 Drop a `.toml` file into `alacritty/themes/themes/` and update the import in `alacritty.toml`.
+
+### New Ghostty theme
+
+Create a file (no extension) in `ghostty/themes/` with color settings, then set `theme = <name>` in `ghostty/config`.
 
 ### New tmux plugin
 

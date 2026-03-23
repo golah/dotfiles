@@ -6,7 +6,12 @@ DOTFILES_DIR="$HOME/dotfiles" # Where you'll clone the repo
 # Alacritty
 mkdir -p ~/.config/alacritty
 ln -sf "$DOTFILES_DIR/alacritty/alacritty.toml" ~/.config/alacritty/alacritty.toml
-ln -sf "$DOTFILES_DIR/alacritty/themes" ~/.config/alacritty/themes # If it's a dir
+ln -sf "$DOTFILES_DIR/alacritty/themes" ~/.config/alacritty/themes
+
+# Ghostty
+mkdir -p ~/.config/ghostty
+ln -sf "$DOTFILES_DIR/ghostty/config" ~/.config/ghostty/config
+ln -sf "$DOTFILES_DIR/ghostty/themes" ~/.config/ghostty/themes
 
 # Tmux
 ln -sf "$DOTFILES_DIR/tmux/.tmux.conf" ~/.tmux.conf
