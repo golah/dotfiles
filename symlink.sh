@@ -17,5 +17,6 @@ ln -sf "$DOTFILES_DIR/nvim" ~/.config/nvim
 
 # Zsh
 ln -sf "$DOTFILES_DIR/zsh/.zshrc" ~/.zshrc
+ln -sf "$DOTFILES_DIR/zsh/.p10k.zsh" ~/.p10k.zsh
 
 echo "Symlinks created!"
