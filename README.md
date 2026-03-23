@@ -153,7 +153,7 @@ Ghostty uses a simple `key = value` format (not TOML). One setting per line, `#`
 | Opacity | **0.8** (80%) | `background-opacity = 0.8` |
 | Blur | **Intensity 20** | `background-blur = 20` |
 | Padding | **10px** all sides | `window-padding-x = 10` / `window-padding-y = 10` |
-| Title bar | **Hidden** | `macos-titlebar-style = hidden` |
+| Title bar | **Transparent** | `macos-titlebar-style = transparent` (blends into background, still draggable) |
 | Option key | **Both as Alt** | `macos-option-as-alt = true` |
 | TERM | `xterm-256color` | `term = xterm-256color` |
 
@@ -189,7 +189,7 @@ To add a custom theme, create a file in `ghostty/themes/` (no extension) using t
 | Font size | `size = 14` | `font-size = 14` |
 | Opacity | `opacity = 0.8` | `background-opacity = 0.8` |
 | Blur | `blur = true` | `background-blur = 20` |
-| Decorations | `decorations = "Buttonless"` | `macos-titlebar-style = hidden` |
+| Decorations | `decorations = "Buttonless"` | `macos-titlebar-style = transparent` |
 | Padding | `padding.x = 10` / `padding.y = 10` | `window-padding-x = 10` / `window-padding-y = 10` |
 | Option as Alt | `option_as_alt = "Both"` | `macos-option-as-alt = true` |
 | TERM env | `[env] TERM = "xterm-256color"` | `term = xterm-256color` |
