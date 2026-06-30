@@ -1,0 +1,20 @@
+# Arch/Omarchy packages (install with pacman)
+neovim
+tmux
+zsh
+fzf
+lazygit
+nodejs
+curl
+eza
+glow
+pandoc
+php
+texlive-bin
+
+# AUR packages (install with yay)
+# ttf-meslo-nerd
+# ttf-hack-nerd
+# zsh-autosuggestions
+# zsh-syntax-highlighting
+# powerlevel10k-git
