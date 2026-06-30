@@ -41,9 +41,9 @@ elif [[ "$OS" == "arch" ]]; then
     cd "$HOME/dotfiles"
   fi
 
-  # Install pacman packages
+  # Install pacman packages (all non-comment, non-blank lines; AUR entries are commented out)
   echo "Installing official packages..."
-  grep -v '^#' packages.arch | grep -v '^$' | head -n 12 | xargs sudo pacman -S --needed --noconfirm
+  grep -v '^#' packages.arch | grep -v '^$' | xargs sudo pacman -S --needed --noconfirm
 
   # Install AUR packages
   echo "Installing AUR packages..."

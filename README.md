@@ -1,6 +1,6 @@
 # Dotfiles
 
-My macOS terminal environment — Alacritty / Ghostty + Zsh + tmux + Neovim, all managed through Homebrew and symlinks.
+My terminal environment for **macOS** and **Arch Linux (Omarchy)** — Alacritty / Ghostty + Zsh + tmux + Neovim, managed through a single OS-aware bootstrap script and symlinks.
 
 ![Shell: Zsh](https://img.shields.io/badge/shell-zsh-informational?style=flat&logo=gnu-bash)
 ![Terminal: Alacritty](https://img.shields.io/badge/terminal-alacritty-F46D01?style=flat&logo=alacritty)
@@ -12,7 +12,7 @@ My macOS terminal environment — Alacritty / Ghostty + Zsh + tmux + Neovim, all
 
 ## Quick Start
 
-On a fresh Mac, run:
+On a fresh machine (macOS or Arch), run:
 
 ```bash
 git clone git@github.com:golah/dotfiles.git ~/dotfiles
@@ -20,13 +20,12 @@ cd ~/dotfiles
 ./install.sh
 ```
 
-This will:
+`install.sh` auto-detects the OS and will:
 
-1. Install **Homebrew** (if missing)
-2. Install all packages and casks from the **Brewfile**
-3. Create **symlinks** for all config files
-4. Sync **Neovim plugins** via Lazy.nvim
-5. Reload **tmux** config if a session is running
+1. Install packages — **Homebrew + Brewfile** on macOS, **pacman + yay** on Arch (see [Arch Linux](#arch-linux-omarchy))
+2. Create **symlinks** for all config files
+3. Sync **Neovim plugins** via Lazy.nvim
+4. Reload **tmux** config if a session is running
 
 After install, restart your terminal.
 
@@ -38,9 +37,8 @@ After install, restart your terminal.
 ~/dotfiles/
 ├── alacritty/
 │   ├── alacritty.toml          # Main Alacritty config
-│   └── themes/                 # 159+ color schemes (TOML)
-│       └── themes/
-│           └── coolnight.toml  # Active theme
+│   └── themes/                 # 159+ color schemes (TOML, flat)
+│       └── coolnight.toml      # Active theme
 ├── ghostty/
 │   ├── config                  # Main Ghostty config
 │   └── themes/
@@ -56,8 +54,9 @@ After install, restart your terminal.
 ├── zsh/
 │   ├── .zshrc                  # Shell config
 │   └── .p10k.zsh               # Powerlevel10k prompt config
-├── Brewfile                    # All Homebrew packages and casks
-├── install.sh                  # One-command bootstrap script
+├── Brewfile                    # All Homebrew packages and casks (macOS)
+├── packages.arch               # pacman + AUR package list (Arch Linux)
+├── install.sh                  # One-command bootstrap script (macOS + Arch)
 └── symlink.sh                  # Creates all symlinks
 ```
 
@@ -73,6 +72,41 @@ After install, restart your terminal.
 | `tmux/.tmux.conf`                   | `~/.tmux.conf`                     |
 | `zsh/.zshrc`                        | `~/.zshrc`                         |
 | `zsh/.p10k.zsh`                     | `~/.p10k.zsh`                      |
+
+---
+
+## Arch Linux (Omarchy)
+
+The same `install.sh` works on Arch-based systems (including [Omarchy](https://omarchy.org)). It detects Arch via `/etc/arch-release` (or an `arch` match in `/etc/os-release`) and uses `pacman` + the [`yay`](https://github.com/Jguer/yay) AUR helper instead of Homebrew. Everything after package installation — symlinks, Neovim plugin sync, tmux reload — is identical to the macOS path.
+
+### What the Arch path does
+
+1. Installs **`yay`** if missing (via `git` + `base-devel` + `makepkg`)
+2. Installs official repo packages from **`packages.arch`** with `pacman`
+3. Installs AUR packages (Nerd Fonts, Zsh plugins, Powerlevel10k) with `yay`
+4. Symlinks configs and syncs Neovim/tmux — same as macOS
+
+### Packages
+
+Official packages live in `packages.arch` (one per line, `#` for comments). AUR packages are installed by `yay`:
+
+| `pacman` (from `packages.arch`)            | AUR (via `yay`)            |
+|--------------------------------------------|----------------------------|
+| neovim, tmux, zsh                          | ttf-meslo-nerd             |
+| fzf, lazygit, eza, glow                    | ttf-hack-nerd              |
+| nodejs, php, curl                          | zsh-autosuggestions        |
+| pandoc, texlive-bin                        | zsh-syntax-highlighting    |
+|                                            | powerlevel10k-git          |
+
+> **Note:** GUI terminals (`alacritty`, `ghostty`) aren't in `packages.arch` — on Omarchy the terminal is provided by the desktop, so install your preferred one with `pacman`/`yay` as needed. The Brewfile (macOS) and `packages.arch` (Arch) are kept in sync by hand; when you add a CLI tool on one platform, add the equivalent to the other.
+
+### Adding an Arch package
+
+```bash
+sudo pacman -S <package>
+# Then add it to packages.arch so it installs on the next machine:
+echo '<package>' >> ~/dotfiles/packages.arch
+```
 
 ---
 
@@ -114,15 +148,15 @@ White        #24EAF7  ████  Cyan (used as white)
 
 ### Switching Themes
 
-159+ themes are bundled in `alacritty/themes/themes/`. To switch, edit the import line in `alacritty.toml`:
+159+ themes are bundled in `alacritty/themes/`. To switch, edit the import line in `alacritty.toml`:
 
 ```toml
 import = [
     "~/.config/alacritty/themes/coolnight.toml"
     # Change to any other theme, e.g.:
-    # "~/.config/alacritty/themes/themes/catppuccin_mocha.toml"
-    # "~/.config/alacritty/themes/themes/tokyo-night.toml"
-    # "~/.config/alacritty/themes/themes/dracula.toml"
+    # "~/.config/alacritty/themes/catppuccin_mocha.toml"
+    # "~/.config/alacritty/themes/tokyo_night.toml"
+    # "~/.config/alacritty/themes/dracula.toml"
 ]
 ```
 
@@ -432,7 +466,7 @@ echo 'brew "<package>"' >> ~/dotfiles/Brewfile
 
 ### New Alacritty theme
 
-Drop a `.toml` file into `alacritty/themes/themes/` and update the import in `alacritty.toml`.
+Drop a `.toml` file into `alacritty/themes/` and update the import in `alacritty.toml`.
 
 ### New Ghostty theme
 
