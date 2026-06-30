@@ -1,0 +1,5 @@
+# Local Claude Code config (personal — never publish)
+.claude/
+
+# macOS
+.DS_Store

@@ -25,6 +25,14 @@ if [[ "$OS" == "macos" ]]; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   fi
 
+  # A fresh Homebrew install doesn't put brew on PATH for this shell.
+  # Apple Silicon installs to /opt/homebrew, Intel to /usr/local.
+  if ! command -v brew &>/dev/null; then
+    for brew_bin in /opt/homebrew/bin/brew /usr/local/bin/brew; do
+      [ -x "$brew_bin" ] && eval "$("$brew_bin" shellenv)" && break
+    done
+  fi
+
   brew bundle install --file=Brewfile
 
 elif [[ "$OS" == "arch" ]]; then
