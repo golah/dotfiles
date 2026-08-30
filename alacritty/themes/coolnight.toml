@@ -1,32 +1,34 @@
-# By Josean Martinez
-# Inspired by aura.toml
+# Coolnight — navy field, mint cursor, cyan accents
+# Bright slots are lighter than normal; white is actually white.
 
-# Default colors
 [colors.primary]
 background = '#011423'
 foreground = '#CBE0F0'
 
-# Colors the cursor will use if `custom_cursor_colors` is true
 [colors.cursor]
 text = "#011423"
 cursor = "#47FF9C"
+
+[colors.selection]
+text = '#CBE0F0'
+background = '#1A4A6E'
 
 [colors.normal]
 black = "#214969"
 red = "#E52E2E"
 green = "#44FFB1"
 yellow = "#FFE073"
-blue = "#0FC5ED"
-magenta = "#a277ff"
+blue = "#3D9FD6"
+magenta = "#A277FF"
 cyan = "#24EAF7"
-white = "#24EAF7"
+white = "#D6E6F0"
 
 [colors.bright]
-black = "#214969"
-red = "#E52E2E"
-green = "#44FFB1"
-yellow = "#FFE073"
-blue = "#A277FF"
-magenta = "#a277ff"
-cyan = "#24EAF7"
-white = "#24EAF7"
+black = "#4A7A9C"
+red = "#FF6B6B"
+green = "#6CFFC4"
+yellow = "#FFE99A"
+blue = "#0FC5ED"
+magenta = "#C4A0FF"
+cyan = "#7AF5FF"
+white = "#F0F7FC"

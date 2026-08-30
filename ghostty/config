@@ -1,8 +1,8 @@
 # Theme
 theme = coolnight
 
-# Font
-font-family = MesloLGS Nerd Font Mono
+# Font — Omarchy Quattro default (was MesloLGS Nerd Font Mono)
+font-family = JetBrainsMono Nerd Font
 font-size = 14
 
 # Window

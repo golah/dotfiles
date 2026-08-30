@@ -1,27 +1,31 @@
-# Coolnight - By Josean Martinez (inspired by Aura)
-# Dark blue background with vibrant cyan/green accents
+# Coolnight — navy field, mint cursor, cyan accents
+# Bright slots are lighter than normal; white is actually white.
 
 background = #011423
 foreground = #CBE0F0
 
 cursor-color = #47FF9C
+cursor-text = #011423
 
-# Normal colors (0-7)
+selection-background = #1A4A6E
+selection-foreground = #CBE0F0
+
+# Normal (0-7)
 palette = 0=#214969
 palette = 1=#E52E2E
 palette = 2=#44FFB1
 palette = 3=#FFE073
-palette = 4=#0FC5ED
+palette = 4=#3D9FD6
 palette = 5=#A277FF
 palette = 6=#24EAF7
-palette = 7=#24EAF7
+palette = 7=#D6E6F0
 
-# Bright colors (8-15)
-palette = 8=#214969
-palette = 9=#E52E2E
-palette = 10=#44FFB1
-palette = 11=#FFE073
-palette = 12=#A277FF
-palette = 13=#A277FF
-palette = 14=#24EAF7
-palette = 15=#24EAF7
+# Bright (8-15)
+palette = 8=#4A7A9C
+palette = 9=#FF6B6B
+palette = 10=#6CFFC4
+palette = 11=#FFE99A
+palette = 12=#0FC5ED
+palette = 13=#C4A0FF
+palette = 14=#7AF5FF
+palette = 15=#F0F7FC
