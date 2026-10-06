@@ -32,3 +32,9 @@ alias ls="eza --icons=always"
 # Set up fzf key bindings and fuzzy completion
 eval "$(fzf --zsh)"
 export PATH="$HOME/.local/bin:$PATH"
+
+# >>> grok installer >>>
+export PATH="$HOME/.grok/bin:$PATH"
+fpath=(~/.grok/completions/zsh $fpath)
+autoload -Uz compinit && compinit -C
+# <<< grok installer <<<
