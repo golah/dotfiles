@@ -43,6 +43,8 @@ After install, restart your terminal.
 │   ├── config                  # Main Ghostty config
 │   └── themes/
 │       └── coolnight           # Coolnight theme (ported from Alacritty)
+├── herdr/
+│   └── config.toml             # Herdr config (theme follows Ghostty)
 ├── nvim/
 │   ├── init.lua                # Entry point (loads LazyVim)
 │   ├── lazy-lock.json          # Pinned plugin versions
@@ -68,6 +70,7 @@ After install, restart your terminal.
 | `alacritty/themes/`                 | `~/.config/alacritty/themes/`      |
 | `ghostty/config`                    | `~/.config/ghostty/config`         |
 | `ghostty/themes/`                   | `~/.config/ghostty/themes/`        |
+| `herdr/config.toml`                 | `~/.config/herdr/config.toml`      |
 | `nvim/`                             | `~/.config/nvim/`                  |
 | `tmux/.tmux.conf`                   | `~/.tmux.conf`                     |
 | `zsh/.zshrc`                        | `~/.zshrc`                         |

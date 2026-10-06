@@ -13,6 +13,10 @@ mkdir -p ~/.config/ghostty
 ln -sf "$DOTFILES_DIR/ghostty/config" ~/.config/ghostty/config
 ln -sf "$DOTFILES_DIR/ghostty/themes" ~/.config/ghostty/themes
 
+# Herdr - only the config file; the dir also holds runtime sockets/logs
+mkdir -p ~/.config/herdr
+ln -sf "$DOTFILES_DIR/herdr/config.toml" ~/.config/herdr/config.toml
+
 # Tmux
 ln -sf "$DOTFILES_DIR/tmux/.tmux.conf" ~/.tmux.conf
 

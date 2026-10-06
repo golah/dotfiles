@@ -1,5 +1,6 @@
 brew "apr-util"
 brew "cocoapods"
+brew "herdr"
 brew "libssh2"
 brew "openldap"
 brew "rtmpdump"
